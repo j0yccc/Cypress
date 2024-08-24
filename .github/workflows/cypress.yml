@@ -6,14 +6,15 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v3
-        with:
+     - name: Checkout
+       uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+     - name: Cypress run
+       uses: cypress-io/github-action@v6
+       with:
+          build: npm run build
+          start: npm start
           project: ./cypress/e2e/1-getting-started
           browser: chrome
-          build: yarn build
-          start: yarn start
-          wait-on: "https://example.cypress.io/todo"
+           wait-on: "https://example.cypress.io/todo"
