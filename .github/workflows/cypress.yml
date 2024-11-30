@@ -68,5 +68,5 @@ jobs:
         with:
           wait-on: "https://example.cypress.io/todo"
           browser: chrome
-          project: cypress/e2e/1-getting-started
+          # project: cypress/e2e/1-getting-started
           start: npm start
