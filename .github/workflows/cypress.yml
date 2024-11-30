@@ -13,10 +13,9 @@ jobs:
      - name: Cypress run
        uses: cypress-io/github-action@v6
        with:
-          build: npm run build
+          build: npm install
           start: npm start
           project: ./cypress/e2e/1-getting-started
           browser: chrome
           wait-on: "https://example.cypress.io/todo"
-          
-          #update test steps
+
