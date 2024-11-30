@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npx cypress run",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build",
+    "start": "npm run start",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --project ./cypress/e2e/1-getting-started --browser chrome --spec '**/*.cy.js'",
+    "cy:run:wait": "wait-on https://example.cypress.io/todo && npm run cy:run"
   },
   "author": "",
   "license": "ISC",

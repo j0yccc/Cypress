@@ -1,21 +1,71 @@
-name: E2E on Chrome
+# name: E2E on Chrome
 
-on: [push]
+# on: [push]
+
+# jobs:
+#   install:
+#     runs-on: ubuntu-latest
+#     steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#       # Install npm dependencies, cache them correctly
+#       # and run all Cypress tests
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v6
+#        with:
+#           build: npm build
+#           start: npm start
+#           project: ./cypress/e2e/1-getting-started
+#           browser: chrome
+#           wait-on: "https://example.cypress.io/todo"
+
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  install:
+  cypress-tests:
     runs-on: ubuntu-latest
-    steps:
-     - name: Checkout
-       uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-     - name: Cypress run
-       uses: cypress-io/github-action@v6
-       with:
-          build: npm install
-          start: npm start
-          project: ./cypress/e2e/1-getting-started
-          browser: chrome
-          wait-on: "https://example.cypress.io/todo"
 
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # Step 4: Build the application
+      - name: Build Application
+        run: npm run build
+
+      # Step 5: Start the application server
+      - name: Start Application
+        run: npm start &
+      
+      # Step 6: Wait for the server to be ready
+      - name: Wait for Server
+        uses: jakejarvis/wait-action@v1
+        with:
+          url: "https://example.cypress.io/todo"
+
+      # Step 7: Run Cypress tests
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          project: ./cypress/e2e/1-getting-started
+          start: npm start
