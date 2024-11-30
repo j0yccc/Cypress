@@ -49,8 +49,8 @@ jobs:
         run: npm ci
 
       # Step 4: Build the application
-      - name: Build Application
-        run: npm run build
+      # - name: Build Application
+      #   run: npm run build
 
       # Step 5: Start the application server
       - name: Start Application

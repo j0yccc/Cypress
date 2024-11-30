@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build",
-    "start": "npm run start",
+    "start": "cypress run",
     "cy:open": "cypress open",
     "cy:run": "cypress run --project ./cypress/e2e/1-getting-started --browser chrome --spec '**/*.cy.js'",
     "cy:run:wait": "wait-on https://example.cypress.io/todo && npm run cy:run"
