@@ -57,15 +57,16 @@ jobs:
         run: npm start &
       
       # Step 6: Wait for the server to be ready
-      - name: Wait for Server
-        uses: jakejarvis/wait-action@v1
-        with:
-          url: "https://example.cypress.io/todo"
+      # - name: Wait for Server
+        # uses: jakejarvis/wait-action@v1
+        # with:
+        #   url: "https://example.cypress.io/todo"
 
       # Step 7: Run Cypress tests
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
+          wait-on: "https://example.cypress.io/todo"
           browser: chrome
           project: ./cypress/e2e/1-getting-started
           start: npm start
